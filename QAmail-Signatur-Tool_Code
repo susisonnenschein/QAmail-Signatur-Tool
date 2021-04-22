@@ -1,0 +1,136 @@
+## Macro title: QAmail-Signatur-Tool
+##
+## Developed by: Susanna Suchan
+## Date created: 23/12/2020
+
+## Input parameters
+## @param AcademicTitle:title=Akademischer Titel|type=enum|enumValues=Dr.,Prof. Dr.|default=|desc=z.B. Dr.
+
+<!-- Confluence context -->
+#set($containerManagerClass =
+$content.class.forName('com.atlassian.spring.container.ContainerManager'))
+#set($getInstanceMethod = $containerManagerClass.getDeclaredMethod('getInstance',null))
+#set($containerManager = $getInstanceMethod.invoke(null,null))
+#set($containerContext = $containerManager.containerContext)
+#set($userDetailsManager = $containerContext.getComponent('userDetailsManager'))
+
+<!-- Get user profile info -->
+#set($position = $userDetailsManager.getStringProperty($action.getAuthenticatedUser(), 'position'))
+#set($location = $userDetailsManager.getStringProperty($action.getAuthenticatedUser(), 'location'))
+#set($phone = $userDetailsManager.getStringProperty($action.getAuthenticatedUser(), 'phone'))
+#set($email = $action.getAuthenticatedUser().getEmail())
+
+<div id="signatureId">
+    <hr
+        size="1"
+        width="100%"
+        align="center"
+        style="height: 1px; background-color: #ccc; border: none">
+    <div style="font-size:8pt;font-family:sans-serif">
+        <p style="margin:0pt 1pt 0pt">
+
+            <!-- Great Place to Work -->
+            <b>Beste Arbeitgeber ITK 2020 - 1. Platz für QAware</b><br>
+            ausgezeichnet von
+            <a href="https://www.qaware.de/news/great-place-to-work-deutschlands-beste-arbeitgeber-2020/">Great Place to Work</a>
+
+        </p>
+        <hr
+            size="1"
+            width="100%"
+            align="center"
+            style="height: 1px; background-color: #ccc; border: none">
+        <p style="margin:0pt 1pt 8pt">
+
+            <!-- Name -->
+            $paramAcademicTitle $action.getAuthenticatedUser().getFullName()<br>
+
+            <!-- Jobtitle -->
+            #if ($position.contains(''))
+                #foreach($pos in $position.split("[;]"))
+                    $pos<br>
+                #end
+            #else
+                <span style="color: purple;">HINTERLEGE DEINE POSITION IN DEINEM CONFLUENCE PROFIL</span><br>
+            #end
+
+        </p>
+
+        <p style="margin:0pt 1pt 0pt">
+
+            <!-- Company -->
+            QAware GmbH<br>
+
+            <!-- Location -->
+            #if ($location.contains('Mainz') || $location.contains('MZ'))
+                Rheinstraße 4 C<br>
+                55116 Mainz, Germany<br>
+            #else
+                Aschauer Straße 32<br>
+                81549 München, Germany<br>
+            #end
+
+            <!-- Phone number -->
+            #if ($phone.contains(''))
+                Mobil $phone<br>
+            #else
+                <span style="color: purple;">HINTERLEGE DEINE TELEFONNUMMER IN DEINEM CONFLUENCE PROFIL</span><br>
+            #end
+
+            <!-- E-Mail-Address -->
+            <a href="mailto:$email">$email</a><br>
+
+            <!-- Website -->
+            <a href="https://www.qaware.de">www.qaware.de</a><br>
+
+        </p>
+    </div>
+    <hr
+        size="1"
+        width="100%"
+        align="center"
+        style="height: 1px; background-color: #ccc; border: none">
+    <div style="font-size:7pt;font-family:sans-serif">
+        <p style="margin:0pt 1pt 14pt">
+
+            <!-- Legal information -->
+            Geschäftsführer: Christian Kamm, Johannes Weigend, Dr. Josef Adersberger<br>
+            Registergericht: München<br>
+            Handelsregisternummer: HRB 163761<br>
+
+        </p>
+    </div>
+</div>
+
+<div>
+    <!-- Copy button -->
+    <button
+        type="button"
+        onclick="copyElementToClipboard('signatureId')"
+        style="background-color: blue; border-radius: 8px; border: none; color: white; font-size: 12px; padding: 5px 10px; cursor: pointer;"
+        id="button">
+        Kopieren
+    </button>
+</div>
+
+<!-- Copy function -->
+<script>
+    function copyElementToClipboard(element) {
+        window
+            .getSelection()
+            .removeAllRanges();
+        const range = document.createRange();
+        range.selectNode(document.getElementById(element));
+        window
+            .getSelection()
+            .addRange(range);
+        document.execCommand('copy');
+        window
+            .getSelection()
+            .removeAllRanges();
+
+        const button = document.getElementById('button');
+        button.innerHTML = "✔ Kopiert";
+        button.style.backgroundColor = "green";
+    }
+</script>
