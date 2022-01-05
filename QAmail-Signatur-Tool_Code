@@ -130,25 +130,40 @@
   `
   }
 
-  function copyElementToClipboard(element) {
-    window
-      .getSelection()
-      .removeAllRanges();
-    const range = document.createRange();
-    range.selectNode(document.getElementById(element));
-    window
-      .getSelection()
-      .addRange(range);
-    document.execCommand('copy');
-    window
-      .getSelection()
-      .removeAllRanges();
+  function copyDataToClipboard(data, formats = ["text/plain"]) {
+    function listener(e) {
+      for (const format of formats) {
+        e.clipboardData.setData(format, data)
+      }
+      e.preventDefault()
+    }
+    document.addEventListener("copy", listener)
+    document.execCommand("copy")
+    document.removeEventListener("copy", listener)
+  }
 
-    const button = document.getElementById('button');
-    button.innerHTML = "✔ Kopiert";
-    button.style.backgroundColor = "green";
+  function toggleButton(buttonId) {
+    const button = document.getElementById(buttonId)
+    button.innerHTML = "✔ Kopiert"
+    button.style.backgroundColor = "green"
     button.style.transition = "transform 1s"
     button.style.transform = "rotate(360deg)"
+  }
+
+  function onCopyTextClicked() {
+    copyDataToClipboard(
+      document.getElementById("signatureId").innerText,
+      ["text/plain"]
+    )
+    toggleButton("copy-text-button")
+  }
+
+  function onCopyHtmlClicked() {
+    copyDataToClipboard(
+      document.getElementById("signatureId").innerHTML,
+      ["text/html", "text/plain"]
+    )
+    toggleButton("copy-html-button")
   }
 
   async function runMacro() {
@@ -175,10 +190,16 @@
 </div>
 
 <div>
-  <!-- Copy button -->
-  <button type="button" onclick="copyElementToClipboard('signatureId')"
+  <!-- Copy text button -->
+  <button type="button" onclick="onCopyTextClicked()"
     style="background-color: blue; border-radius: 8px; border: none; color: white; font-size: 12px; padding: 5px 10px; cursor: pointer;"
-    id="button">
+    id="copy-text-button">
     Kopieren
+  </button>
+  <!-- Copy HTML button -->
+  <button type="button" onclick="onCopyHtmlClicked()"
+    style="background-color: #999; border-radius: 8px; border: none; color: white; font-size: 12px; padding: 5px 10px; cursor: pointer;"
+    id="copy-html-button">
+    HTML kopieren
   </button>
 </div>
