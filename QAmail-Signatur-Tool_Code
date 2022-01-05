@@ -1,136 +1,184 @@
 ## Macro title: QAmail-Signatur-Tool
 ##
 ## Developed by: Susanna Suchan
-## Date created: 23/12/2020
+## Date created: 19/11/2021
 
 ## Input parameters
 ## @param AcademicTitle:title=Akademischer Titel|type=enum|enumValues=Dr.,Prof. Dr.|default=|desc=z.B. Dr.
 
-<!-- Confluence context -->
-#set($containerManagerClass =
-$content.class.forName('com.atlassian.spring.container.ContainerManager'))
-#set($getInstanceMethod = $containerManagerClass.getDeclaredMethod('getInstance',null))
-#set($containerManager = $getInstanceMethod.invoke(null,null))
-#set($containerContext = $containerManager.containerContext)
-#set($userDetailsManager = $containerContext.getComponent('userDetailsManager'))
+<script>
+  //<![CDATA[
 
-<!-- Get user profile info -->
-#set($position = $userDetailsManager.getStringProperty($action.getAuthenticatedUser(), 'position'))
-#set($location = $userDetailsManager.getStringProperty($action.getAuthenticatedUser(), 'location'))
-#set($phone = $userDetailsManager.getStringProperty($action.getAuthenticatedUser(), 'phone'))
-#set($email = $action.getAuthenticatedUser().getEmail())
+  async function fetchUsername() {
+    const res = await fetch("/confluence/rest/api/user/current")
+    if (!res.ok) {
+      throw new Exception("Could not fetch current username")
+    }
+    const { username } = await res.json()
+    return username
+  }
 
-<div id="signatureId">
+  async function fetchUserProfile() {
+    const username = await fetchUsername()
+    const res = await fetch(`/confluence/rest/mobile/1.0/profile/${username}`)
+    if (!res.ok) {
+      throw new Exception(`Could not fetch user profile for user "${username}"`)
+    }
+    return res.json()
+  }
+
+
+  function renderPositions(position) {
+    if (position === undefined) {
+      return `<span style="color: purple;">HINTERLEGE DEINE POSITION IN DEINEM CONFLUENCE PROFIL</span><br>`
+    }
+    const positions = position.split(";")
+    return positions.map(pos => `${pos}<br>`).join("")
+  }
+
+  function renderLocation(location) {
+    const mainz = `Rheinstraße 4 C<br>
+  55116 Mainz, Germany<br>`
+    const munich = `Aschauer Straße 32<br>
+  81549 München, Germany<br>`
+
+    if (location.includes("Mainz") || location.includes("MZ")) {
+      return mainz
+    } else {
+      return munich
+    }
+  }
+
+  function renderPhone(phone) {
+    if (phone === undefined) {
+      return `<span style="color: purple;">HINTERLEGE DEINE TELEFONNUMMER IN DEINEM CONFLUENCE PROFIL</span><br>`
+    }
+    return `Mobil ${phone}<br>`
+  }
+
+  function renderSignature(profile) {
+    const { fullName, position, location: physicalLocation = "", phone, email } = profile
+
+    const positionsHtml = renderPositions(position)
+    const locationHtml = renderLocation(physicalLocation)
+    const phoneHtml = renderPhone(phone)
+
+    return `
+  <div id="signatureId">
     <hr
         size="1"
         width="100%"
         align="center"
         style="height: 1px; background-color: #ccc; border: none">
-    <div style="font-size:8pt;font-family:sans-serif">
-        <p style="margin:0pt 1pt 0pt">
 
+    <div style="font-size:8pt;font-family:sans-serif">
+      <p style="margin:0pt 1pt 0pt">
             <!-- Great Place to Work -->
             <b>Beste Arbeitgeber ITK 2021 - 1. Platz für QAware</b><br>
             ausgezeichnet von
             <a href="https://www.qaware.de/news/platz-1-bei-beste-arbeitgeber-in-der-itk-2021/">Great Place to Work</a>
-
-        </p>
-        <hr
+      </p>
+      <hr
             size="1"
             width="100%"
             align="center"
             style="height: 1px; background-color: #ccc; border: none">
-        <p style="margin:0pt 1pt 8pt">
+      <p style="margin:0pt 1pt 8pt">
 
             <!-- Name -->
-            $paramAcademicTitle $action.getAuthenticatedUser().getFullName()<br>
+            $paramAcademicTitle ${fullName}<br>
 
             <!-- Jobtitle -->
-            #if ($position.contains(''))
-                #foreach($pos in $position.split("[;]"))
-                    $pos<br>
-                #end
-            #else
-                <span style="color: purple;">HINTERLEGE DEINE POSITION IN DEINEM CONFLUENCE PROFIL</span><br>
-            #end
-
-        </p>
-
-        <p style="margin:0pt 1pt 0pt">
+            ${positionsHtml}
+      </p>
+      <p style="margin:0pt 1pt 0pt">
 
             <!-- Company -->
             QAware GmbH<br>
 
             <!-- Location -->
-            #if ($location.contains('Mainz') || $location.contains('MZ'))
-                Rheinstraße 4 C<br>
-                55116 Mainz, Germany<br>
-            #else
-                Aschauer Straße 32<br>
-                81549 München, Germany<br>
-            #end
+            ${locationHtml}
 
             <!-- Phone number -->
-            #if ($phone.contains(''))
-                Mobil $phone<br>
-            #else
-                <span style="color: purple;">HINTERLEGE DEINE TELEFONNUMMER IN DEINEM CONFLUENCE PROFIL</span><br>
-            #end
+            ${phoneHtml}
 
             <!-- E-Mail-Address -->
-            <a href="mailto:$email">$email</a><br>
+            <a href="mailto:${email}">${email}</a><br>
 
             <!-- Website -->
             <a href="https://www.qaware.de">www.qaware.de</a><br>
 
-        </p>
+      </p> 
     </div>
     <hr
         size="1"
         width="100%"
         align="center"
         style="height: 1px; background-color: #ccc; border: none">
+
     <div style="font-size:7pt;font-family:sans-serif">
         <p style="margin:0pt 1pt 14pt">
 
             <!-- Legal information -->
-            Geschäftsführer: Christian Kamm, Johannes Weigend, Dr. Josef Adersberger<br>
+            Geschäftsführer: Christian Kamm, Dr. Josef Adersberger<br>
             Registergericht: München<br>
             Handelsregisternummer: HRB 163761<br>
 
         </p>
     </div>
+  </div>
+  `
+  }
+
+  function copyElementToClipboard(element) {
+    window
+      .getSelection()
+      .removeAllRanges();
+    const range = document.createRange();
+    range.selectNode(document.getElementById(element));
+    window
+      .getSelection()
+      .addRange(range);
+    document.execCommand('copy');
+    window
+      .getSelection()
+      .removeAllRanges();
+
+    const button = document.getElementById('button');
+    button.innerHTML = "✔ Kopiert";
+    button.style.backgroundColor = "green";
+    button.style.transition = "transform 1s"
+    button.style.transform = "rotate(360deg)"
+  }
+
+  async function runMacro() {
+    try {
+      const profile = await fetchUserProfile()
+      const rootElement = document.getElementById("email-template-root")
+      rootElement.innerHTML = renderSignature(profile)
+    } catch (e) {
+      alert(e.message)
+    }
+  }
+
+
+  AJS.toInit(() => {
+    runMacro()
+  })
+
+
+// ]]>
+</script>
+
+<div id="email-template-root">
+  <div style="padding: 20px; ">⌛ Signatur kommt...</div>
 </div>
 
 <div>
-    <!-- Copy button -->
-    <button
-        type="button"
-        onclick="copyElementToClipboard('signatureId')"
-        style="background-color: blue; border-radius: 8px; border: none; color: white; font-size: 12px; padding: 5px 10px; cursor: pointer;"
-        id="button">
-        Kopieren
-    </button>
+  <!-- Copy button -->
+  <button type="button" onclick="copyElementToClipboard('signatureId')"
+    style="background-color: blue; border-radius: 8px; border: none; color: white; font-size: 12px; padding: 5px 10px; cursor: pointer;"
+    id="button">
+    Kopieren
+  </button>
 </div>
-
-<!-- Copy function -->
-<script>
-    function copyElementToClipboard(element) {
-        window
-            .getSelection()
-            .removeAllRanges();
-        const range = document.createRange();
-        range.selectNode(document.getElementById(element));
-        window
-            .getSelection()
-            .addRange(range);
-        document.execCommand('copy');
-        window
-            .getSelection()
-            .removeAllRanges();
-
-        const button = document.getElementById('button');
-        button.innerHTML = "✔ Kopiert";
-        button.style.backgroundColor = "green";
-    }
-</script>
