@@ -150,14 +150,6 @@
     button.style.transform = "rotate(360deg)"
   }
 
-  function onCopyTextClicked() {
-    copyDataToClipboard(
-      document.getElementById("signatureId").innerText,
-      ["text/plain"]
-    )
-    toggleButton("copy-text-button")
-  }
-
   function onCopyHtmlClicked() {
     copyDataToClipboard(
       document.getElementById("signatureId").innerHTML,
@@ -190,16 +182,10 @@
 </div>
 
 <div>
-  <!-- Copy text button -->
-  <button type="button" onclick="onCopyTextClicked()"
-    style="background-color: blue; border-radius: 8px; border: none; color: white; font-size: 12px; padding: 5px 10px; cursor: pointer;"
-    id="copy-text-button">
-    Kopieren
-  </button>
   <!-- Copy HTML button -->
   <button type="button" onclick="onCopyHtmlClicked()"
-    style="background-color: #999; border-radius: 8px; border: none; color: white; font-size: 12px; padding: 5px 10px; cursor: pointer;"
+    style="background-color: blue; border-radius: 8px; border: none; color: white; font-size: 12px; padding: 5px 10px; cursor: pointer;"
     id="copy-html-button">
-    HTML kopieren
+    Kopieren
   </button>
 </div>
