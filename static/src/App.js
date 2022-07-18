@@ -127,100 +127,109 @@ function App() {
 
   return (
     <div>
-      <div id="signature-input">
-        <p>
-          <select
-            name="user-title"
-            id="user-title"
-            value={title}
-            onChange={(event) => setTitle(event.target.value)}
+      <div style={{ display: "flex" }}>
+        <div id="signature-input" style={{ marginRight: "1em" }}>
+          <p>
+            <label for="user-title" style={{ marginRight: "1em" }}>Dein akademischer Titel:</label>
+            <select
+              name="user-title"
+              id="user-title"
+              value={title}
+              onChange={(event) => setTitle(event.target.value)}
+              style={{ float: "right" }}
+            >
+              <option value="">Keiner</option>
+              <option value="Dr.">Dr.</option>
+              <option value="Prof. Dr.">Prof. Dr.</option>
+            </select>
+          </p>
+          <p>
+            <input
+              type="text"
+              id="user-name"
+              name="user-name"
+              placeholder="Dein Name"
+              value={userName}
+              onChange={(event) => setUserName(event.target.value)}
+              style={{ width: "100%", boxSizing: "border-box" }}
+            />
+          </p>
+          <p>
+            <input
+              type="text"
+              id="user-email"
+              name="user-email"
+              placeholder="Deine E-Mail-Adresse"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              style={{ width: "100%", boxSizing: "border-box" }}
+            />
+          </p>
+          <p>
+            <textarea
+              cols="30"
+              rows="5"
+              id="user-roles"
+              name="user-roles"
+              placeholder="Deine Rollen (eine pro Zeile)"
+              value={roles}
+              onChange={(event) => setRoles(event.target.value)}
+              style={{ width: "100%", boxSizing: "border-box" }}
+            />
+          </p>
+          <p>
+            <label for="user-location" style={{ marginRight: "1em" }}>Dein Standort:</label>
+            <select
+              name="user-location"
+              id="user-location"
+              value={location}
+              onChange={(event) => setLocation(event.target.value)}
+              style={{ float: "right" }}
+            >
+              <option value="munich">München</option>
+              <option value="mainz">Mainz</option>
+            </select>
+          </p>
+          <p>
+            <input
+              type="text"
+              id="user-phone"
+              name="user-phone"
+              placeholder="Deine Telefonnummer"
+              value={phone}
+              onChange={(event) => setPhone(event.target.value)}
+              style={{ width: "100%", boxSizing: "border-box" }}
+            />
+          </p>
+        </div>
+        <div id="signature-output" style={{ marginLeft: "3em" }}>
+          <Signature
+            title={title}
+            name={userName}
+            roles={roles}
+            officeLocation={location}
+            phone={phone}
+            email={email}
+          />
+          <button
+            type="button"
+            onClick={() => copySignature()}
+            style={{
+              backgroundColor: hasBeenCopied ? "green" : "blue",
+              borderRadius: "8px",
+              border: "none",
+              color: "white",
+              fontSize: "12px",
+              padding: "5px 10px",
+              cursor: "pointer",
+              transition: "transform 1s",
+              transform: hasBeenCopied ? "rotate(360deg)" : null,
+            }}
+            id="copy-html-button"
           >
-            <option value="">Akademischer Titel: Keiner</option>
-            <option value="Dr.">Akademischer Titel: Dr.</option>
-            <option value="Prof. Dr.">Akademischer Titel: Prof. Dr.</option>
-          </select>
-        </p>
-        <p>
-          <input
-            type="text"
-            id="user-name"
-            name="user-name"
-            placeholder="Dein Name"
-            value={userName}
-            onChange={(event) => setUserName(event.target.value)}
-          />
-        </p>
-        <p>
-          <input
-            type="text"
-            id="user-email"
-            name="user-email"
-            placeholder="Deine E-Mail-Adresse"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-          />
-        </p>
-        <p>
-          <textarea
-            cols="30"
-            rows="5"
-            id="user-roles"
-            name="user-roles"
-            placeholder="Deine Rollen (eine pro Zeile)"
-            value={roles}
-            onChange={(event) => setRoles(event.target.value)}
-          />
-        </p>
-        <p>
-          <select
-            name="user-location"
-            id="user-location"
-            value={location}
-            onChange={(event) => setLocation(event.target.value)}
-          >
-            <option value="munich">Dein Standort: München</option>
-            <option value="mainz">Dein Standort: Mainz</option>
-          </select>
-        </p>
-        <p>
-          <input
-            type="text"
-            id="user-phone"
-            name="user-phone"
-            placeholder="Deine Telefonnummer"
-            value={phone}
-            onChange={(event) => setPhone(event.target.value)}
-          />
-        </p>
-      </div>
-      <Signature
-        title={title}
-        name={userName}
-        roles={roles}
-        officeLocation={location}
-        phone={phone}
-        email={email}
-      />
-
-      <div>
-        <button
-          type="button"
-          onClick={() => copySignature()}
-          style={{
-            backgroundColor: hasBeenCopied ? "green" : "blue",
-            borderRadius: "8px",
-            border: "none",
-            color: "white",
-            fontSize: "12px",
-            padding: "5px 10px",
-            cursor: "pointer",
-            transition: "transform 1s",
-            transform: hasBeenCopied ? "rotate(360deg)" : null,
-          }}
-          id="copy-html-button"
-        >
-          {hasBeenCopied ? "✔ Kopiert" : "Kopieren"}
-        </button>
+            {hasBeenCopied ? "✔ Kopiert" : "Kopieren"}
+          </button>
+        </div>
       </div>
     </div>
   )
