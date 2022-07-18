@@ -155,17 +155,6 @@ function App() {
             />
           </p>
           <p>
-            <input
-              type="text"
-              id="user-email"
-              name="user-email"
-              placeholder="Deine E-Mail-Adresse"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              style={{ width: "100%", boxSizing: "border-box" }}
-            />
-          </p>
-          <p>
             <textarea
               cols="30"
               rows="5"
@@ -198,6 +187,17 @@ function App() {
               placeholder="Deine Telefonnummer"
               value={phone}
               onChange={(event) => setPhone(event.target.value)}
+              style={{ width: "100%", boxSizing: "border-box" }}
+            />
+          </p>
+          <p>
+            <input
+              type="text"
+              id="user-email"
+              name="user-email"
+              placeholder="Deine E-Mail-Adresse"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
               style={{ width: "100%", boxSizing: "border-box" }}
             />
           </p>
