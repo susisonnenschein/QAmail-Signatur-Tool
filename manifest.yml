@@ -1,0 +1,22 @@
+modules:
+  macro:
+    - key: qaware-email-signature
+      resource: main
+      resolver:
+        function: resolver
+      title: QAware Email Signature Generator
+      description: Displays a QAware-specific email signature generator
+  function:
+    - key: resolver
+      handler: index.handler
+resources:
+  - key: main
+    path: static/build
+app:
+  id: ari:cloud:ecosystem::app/fc4965d6-ea3d-420c-ac2e-eb85c80798bc
+permissions:
+  scopes:
+    - read:confluence-user
+  content:
+    styles:
+      - 'unsafe-inline'
