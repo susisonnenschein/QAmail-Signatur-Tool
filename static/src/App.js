@@ -202,9 +202,9 @@ function App() {
             />
           </p>
         </div>
-        <div id="signature-output" style={{ marginLeft: "2em", border: "1px solid #BBB", borderRadius: "3px" }}>
-          <div style={{ borderBottom: "1px solid #BBB", padding: "8px", fontWeight: "bold" }}>
-            Die für dich generierte QAmail-Signatur 🙂:
+        <div id="signature-output" style={{ marginLeft: "2em", border: "1px solid #0593d8", borderRadius: "3px" }}>
+          <div style={{ backgroundColor: "#0593d8", color: "white", padding: "8px", fontWeight: "bold" }}>
+            Die für dich generierte QAmail-Signatur 🙂
           </div>
           <div style={{ padding: "8px" }}>
             <Signature
