@@ -129,67 +129,65 @@ function App() {
     <div>
       <div id="signature-input">
         <p>
-          <label for="user-title">Akademischer Titel:</label>
           <select
             name="user-title"
             id="user-title"
             value={title}
             onChange={(event) => setTitle(event.target.value)}
           >
-            <option value="">Kein Titel</option>
-            <option>Dr.</option>
-            <option>Prof. Dr.</option>
+            <option value="">Akademischer Titel: Keiner</option>
+            <option value="Dr.">Akademischer Titel: Dr.</option>
+            <option value="Prof. Dr.">Akademischer Titel: Prof. Dr.</option>
           </select>
         </p>
         <p>
-          <label for="user-name">Dein Name</label>
           <input
             type="text"
             id="user-name"
             name="user-name"
+            placeholder="Dein Name"
             value={userName}
             onChange={(event) => setUserName(event.target.value)}
           />
         </p>
         <p>
-          <label for="user-name">Deine E-Mail Adresse</label>
           <input
             type="text"
             id="user-email"
             name="user-email"
+            placeholder="Deine E-Mail-Adresse"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
           />
         </p>
         <p>
-          <label for="user-roles">Deine Rollen (eine pro Zeile)</label>
           <textarea
             cols="30"
             rows="5"
             id="user-roles"
             name="user-roles"
+            placeholder="Deine Rollen (eine pro Zeile)"
             value={roles}
             onChange={(event) => setRoles(event.target.value)}
           />
         </p>
         <p>
-          <label for="user-location">Dein Standort</label>
           <select
             name="user-location"
             id="user-location"
             value={location}
             onChange={(event) => setLocation(event.target.value)}
           >
-            <option value="munich">München</option>
-            <option value="mainz">Mainz</option>
+            <option value="munich">Dein Standort: München</option>
+            <option value="mainz">Dein Standort: Mainz</option>
           </select>
         </p>
         <p>
-          <label for="user-phone">Dein Telefonnummer</label>
           <input
             type="text"
             id="user-phone"
             name="user-phone"
+            placeholder="Deine Telefonnummer"
             value={phone}
             onChange={(event) => setPhone(event.target.value)}
           />
