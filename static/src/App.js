@@ -176,7 +176,7 @@ function App() {
               onChange={(event) => setLocation(event.target.value)}
               style={{ float: "right" }}
             >
-              <option value="munich">München</option>
+              <option value="munich">München/Rosenheim</option>
               <option value="mainz">Mainz</option>
             </select>
           </p>
