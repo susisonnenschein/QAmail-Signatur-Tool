@@ -219,7 +219,7 @@ function App() {
               type="button"
               onClick={() => copySignature()}
               style={{
-                backgroundColor: hasBeenCopied ? "green" : "blue",
+                backgroundColor: hasBeenCopied ? "green" : "#0593d8",
                 borderRadius: "8px",
                 border: "none",
                 color: "white",
