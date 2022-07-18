@@ -129,79 +129,84 @@ function App() {
   return (
     <div>
       <div style={{ display: "flex" }}>
-        <div id="signature-input" style={{ marginRight: "1em" }}>
-          <p>
-            <label for="user-title" style={{ marginRight: "1em" }}>Dein akademischer Titel:</label>
-            <select
-              name="user-title"
-              id="user-title"
-              value={title}
-              onChange={(event) => setTitle(event.target.value)}
-              style={{ float: "right" }}
-            >
-              <option value="">Keiner</option>
-              <option value="Dr.">Dr.</option>
-              <option value="Prof. Dr.">Prof. Dr.</option>
-            </select>
-          </p>
-          <p>
-            <input
-              type="text"
-              id="user-name"
-              name="user-name"
-              placeholder="Dein Name"
-              value={userName}
-              onChange={(event) => setUserName(event.target.value)}
-              style={{ width: "100%", boxSizing: "border-box" }}
-            />
-          </p>
-          <p>
-            <textarea
-              cols="30"
-              rows="5"
-              id="user-roles"
-              name="user-roles"
-              placeholder="Deine Rollen (eine pro Zeile)"
-              value={roles}
-              onChange={(event) => setRoles(event.target.value)}
-              style={{ width: "100%", boxSizing: "border-box" }}
-            />
-          </p>
-          <p>
-            <label for="user-location" style={{ marginRight: "1em" }}>Dein Standort:</label>
-            <select
-              name="user-location"
-              id="user-location"
-              value={location}
-              onChange={(event) => setLocation(event.target.value)}
-              style={{ float: "right" }}
-            >
-              <option value="munich">München/Rosenheim</option>
-              <option value="mainz">Mainz</option>
-            </select>
-          </p>
-          <p>
-            <input
-              type="text"
-              id="user-phone"
-              name="user-phone"
-              placeholder="Deine Telefonnummer"
-              value={phone}
-              onChange={(event) => setPhone(event.target.value)}
-              style={{ width: "100%", boxSizing: "border-box" }}
-            />
-          </p>
-          <p>
-            <input
-              type="text"
-              id="user-email"
-              name="user-email"
-              placeholder="Deine E-Mail-Adresse"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              style={{ width: "100%", boxSizing: "border-box" }}
-            />
-          </p>
+        <div id="signature-input" style={{ border: "1px solid #fec900", borderRadius: "3px" }}>
+          <div style={{ backgroundColor: "#fec900", color: "#333", padding: "8px", fontWeight: "bold" }}>
+            Deine Angaben
+          </div>
+          <div style={{ padding: "8px" }}>
+            <p>
+              <label for="user-title" style={{ marginRight: "1em" }}>Dein akademischer Titel:</label>
+              <select
+                name="user-title"
+                id="user-title"
+                value={title}
+                onChange={(event) => setTitle(event.target.value)}
+                style={{ float: "right" }}
+              >
+                <option value="">Keiner</option>
+                <option value="Dr.">Dr.</option>
+                <option value="Prof. Dr.">Prof. Dr.</option>
+              </select>
+            </p>
+            <p>
+              <input
+                type="text"
+                id="user-name"
+                name="user-name"
+                placeholder="Dein Name"
+                value={userName}
+                onChange={(event) => setUserName(event.target.value)}
+                style={{ width: "100%", boxSizing: "border-box" }}
+              />
+            </p>
+            <p>
+              <textarea
+                cols="30"
+                rows="5"
+                id="user-roles"
+                name="user-roles"
+                placeholder="Deine Rollen (eine pro Zeile)"
+                value={roles}
+                onChange={(event) => setRoles(event.target.value)}
+                style={{ width: "100%", boxSizing: "border-box" }}
+              />
+            </p>
+            <p>
+              <label for="user-location" style={{ marginRight: "1em" }}>Dein Standort:</label>
+              <select
+                name="user-location"
+                id="user-location"
+                value={location}
+                onChange={(event) => setLocation(event.target.value)}
+                style={{ float: "right" }}
+              >
+                <option value="munich">München/Rosenheim</option>
+                <option value="mainz">Mainz</option>
+              </select>
+            </p>
+            <p>
+              <input
+                type="text"
+                id="user-phone"
+                name="user-phone"
+                placeholder="Deine Telefonnummer"
+                value={phone}
+                onChange={(event) => setPhone(event.target.value)}
+                style={{ width: "100%", boxSizing: "border-box" }}
+              />
+            </p>
+            <p>
+              <input
+                type="text"
+                id="user-email"
+                name="user-email"
+                placeholder="Deine E-Mail-Adresse"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                style={{ width: "100%", boxSizing: "border-box" }}
+              />
+            </p>
+          </div>
         </div>
         <div id="signature-output" style={{ marginLeft: "2em", border: "1px solid #0593d8", borderRadius: "3px" }}>
           <div style={{ backgroundColor: "#0593d8", color: "white", padding: "8px", fontWeight: "bold" }}>
