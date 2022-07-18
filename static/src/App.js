@@ -202,33 +202,38 @@ function App() {
             />
           </p>
         </div>
-        <div id="signature-output" style={{ marginLeft: "3em" }}>
-          <Signature
-            title={title}
-            name={userName}
-            roles={roles}
-            officeLocation={location}
-            phone={phone}
-            email={email}
-          />
-          <button
-            type="button"
-            onClick={() => copySignature()}
-            style={{
-              backgroundColor: hasBeenCopied ? "green" : "blue",
-              borderRadius: "8px",
-              border: "none",
-              color: "white",
-              fontSize: "12px",
-              padding: "5px 10px",
-              cursor: "pointer",
-              transition: "transform 1s",
-              transform: hasBeenCopied ? "rotate(360deg)" : null,
-            }}
-            id="copy-html-button"
-          >
-            {hasBeenCopied ? "✔ Kopiert" : "Kopieren"}
-          </button>
+        <div id="signature-output" style={{ marginLeft: "2em", border: "1px solid #BBB", borderRadius: "3px" }}>
+          <div style={{ borderBottom: "1px solid #BBB", padding: "8px", fontWeight: "bold" }}>
+            Die für dich generierte QAmail-Signatur 🙂:
+          </div>
+          <div style={{ padding: "8px" }}>
+            <Signature
+              title={title}
+              name={userName}
+              roles={roles}
+              officeLocation={location}
+              phone={phone}
+              email={email}
+            />
+            <button
+              type="button"
+              onClick={() => copySignature()}
+              style={{
+                backgroundColor: hasBeenCopied ? "green" : "blue",
+                borderRadius: "8px",
+                border: "none",
+                color: "white",
+                fontSize: "12px",
+                padding: "5px 10px",
+                cursor: "pointer",
+                transition: "transform 1s",
+                transform: hasBeenCopied ? "rotate(360deg)" : null,
+              }}
+              id="copy-html-button"
+            >
+              {hasBeenCopied ? "✔ Kopiert" : "Kopieren"}
+            </button>
+          </div>
         </div>
       </div>
     </div>
