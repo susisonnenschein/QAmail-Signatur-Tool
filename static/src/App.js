@@ -123,6 +123,7 @@ function App() {
       ["text/html", "text/plain"]
     )
     setHasBeenCopied(true)
+    setTimeout(() => setHasBeenCopied(false), 2000)
   }
 
   return (
