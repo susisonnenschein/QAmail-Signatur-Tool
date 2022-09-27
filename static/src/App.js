@@ -53,7 +53,6 @@ function Signature(props) {
         />
         <p style={{ margin: "0pt 1pt 8pt" }}>
           {props.title} {props.name}
-          <br />
           {props.roles.split("\n").map(role => <div>{role}</div>)}
         </p>
         <p style={{ margin: "0pt 1pt 0pt" }}>
