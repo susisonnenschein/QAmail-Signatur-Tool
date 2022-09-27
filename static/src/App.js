@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { Fragment, useEffect, useState } from "react"
 import { requestConfluence } from "@forge/bridge"
 
 async function fetchUser() {
@@ -53,7 +53,8 @@ function Signature(props) {
         />
         <p style={{ margin: "0pt 1pt 8pt" }}>
           {props.title} {props.name}
-          {props.roles.split("\n").map(role => <div>{role}</div>)}
+          <br/>
+          {props.roles.split("\n").map(role => <Fragment>{role}<br/></Fragment>)}
         </p>
         <p style={{ margin: "0pt 1pt 0pt" }}>
           QAware GmbH
