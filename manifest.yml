@@ -1,10 +1,10 @@
 modules:
   macro:
-    - key: qaware-email-signature
+    - key: qamail-signatur-tool
       resource: main
       resolver:
         function: resolver
-      title: QAware Email Signature Generator
+      title: QAmail Signatur Tool
       description: Displays a QAware-specific email signature generator
   function:
     - key: resolver
@@ -13,7 +13,7 @@ resources:
   - key: main
     path: static/build
 app:
-  id: ari:cloud:ecosystem::app/fc4965d6-ea3d-420c-ac2e-eb85c80798bc
+  id: ari:cloud:ecosystem::app/45eb37c6-1f09-471d-a5b1-a2819aa2017c
 permissions:
   scopes:
     - read:confluence-user
