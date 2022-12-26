@@ -76,7 +76,7 @@ function Signature(props) {
 
       <div style={{ fontSize: "7pt", fontFamily: "sans-serif" }}>
         <p style={{ margin: "0pt 1pt 14pt" }}>
-          Geschäftsführer: Christian Kamm, Dr. Josef Adersberger
+          Geschäftsführer: Christian Kamm, Dr. Josef Adersberger, Mario-Leander Reimer, Michael Rohleder, Michael Stehnken
           <br />
           Registergericht: München
           <br />
