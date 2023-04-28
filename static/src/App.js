@@ -38,10 +38,10 @@ function Signature(props) {
 
       <div style={{ fontSize: "8pt", fontFamily: "sans-serif" }}>
         <p style={{ margin: "0pt 1pt 0pt" }}>
-          <b>Beste Arbeitgeber ITK 2022 - 1. Platz für QAware</b>
+          <b>Beste Arbeitgeber ITK 2023 - 1. Platz für QAware</b>
           <br />
           ausgezeichnet von&nbsp;
-          <a href="https://www.qaware.de/news/great-place-to-work-triple-fuer-qaware">
+          <a href="https://www.qaware.de/news/great-place-to-work-2023-triple-fuer-qaware/">
             Great Place to Work
           </a>
         </p>
