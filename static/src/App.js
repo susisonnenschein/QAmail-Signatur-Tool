@@ -36,7 +36,7 @@ function Signature(props) {
         style={{ height: "1px", backgroundColor: "#ccc", border: "none" }}
       />
 
-      <div style={{ fontSize: "8pt", fontFamily: "sans-serif" }}>
+      <div style={{ fontSize: "8pt", fontFamily: "sans-serif", color: "black" }}>
         <p style={{ margin: "0pt 1pt 0pt" }}>
           <b>Beste Arbeitgeber ITK 2023 - 1. Platz für QAware</b>
           <br />
@@ -67,6 +67,7 @@ function Signature(props) {
           <br />
         </p>
       </div>
+
       <hr
         size="1"
         width="100%"
@@ -74,7 +75,7 @@ function Signature(props) {
         style={{ height: "1px", backgroundColor: "#ccc", border: "none" }}
       />
 
-      <div style={{ fontSize: "7pt", fontFamily: "sans-serif" }}>
+      <div style={{ fontSize: "7pt", fontFamily: "sans-serif", color: "black" }}>
         <p style={{ margin: "0pt 1pt 14pt" }}>
           Geschäftsführer: Christian Kamm, Dr. Josef Adersberger, Mario-Leander Reimer, Michael Rohleder, Michael Stehnken
           <br />
