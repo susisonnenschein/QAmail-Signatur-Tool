@@ -20,7 +20,7 @@ function Location({ officeLocation }) {
   }
   return (
     <div id="location">
-      Aschauer Straße 32<br/>
+      Aschauer Straße 30<br/>
       81549 München, Germany
     </div>
   )
