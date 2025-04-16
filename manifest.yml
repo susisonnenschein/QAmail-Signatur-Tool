@@ -14,9 +14,11 @@ resources:
     path: static/build
 app:
   id: ari:cloud:ecosystem::app/45eb37c6-1f09-471d-a5b1-a2819aa2017c
+  runtime:
+    name: nodejs22.x
 permissions:
   scopes:
     - read:confluence-user
   content:
     styles:
-      - 'unsafe-inline'
+      - "unsafe-inline"
